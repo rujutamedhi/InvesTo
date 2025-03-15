@@ -1,37 +1,46 @@
-"use client"
+"use client";
 
-import "../styles/pageviewschart.css"
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
+import "../styles/pageviewschart.css";
+const data = [
+  { month: "Jan", Stocks: 5000, Bonds: 3000, Insurance: 1500 },
+  { month: "Feb", Stocks: 8000, Bonds: 4000, Insurance: 2000 },
+  { month: "Mar", Stocks: 7000, Bonds: 3500, Insurance: 1800 },
+  { month: "Apr", Stocks: 9000, Bonds: 5000, Insurance: 2500 },
+  { month: "May", Stocks: 11000, Bonds: 6000,Insurance: 3000 },
+  { month: "Jun", Stocks: 6000, Bonds: 3200, Insurance: 1600 },
+  { month: "Jul", Stocks: 6500, Bonds: 3500, Insurance: 1700 },
+];
 
-export default function PageViewsChart() {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]
-
+export default function StocksChart() {
   return (
     <div className="pageviews-chart">
       <div className="pageviews-chart-header">
-        <div>
-          <h3 className="pageviews-chart-title">Page views and downloads</h3>
-          <div className="pageviews-chart-value">
-            <p className="total-value">1.3M</p>
-            <span className="value-change negative">-8%</span>
-          </div>
-          <p className="pageviews-chart-period">Page views and downloads for the last 6 months</p>
+        <p className="pageviews-chart-title">Summary</p>
+        <div className="pageviews-chart-value">
+          <p className="total-value">1.3M</p>
+          <span className="value-change negative">-8%</span>
         </div>
+        <p className="pageviews-chart-period">Page views and Bonds for the last 6 months</p>
       </div>
 
-      <div className="bar-chart-container">
-        <div className="bar-chart">
-          {months.map((month, i) => (
-            <div key={month} className="bar-column">
-              <div className="bar-wrapper">
-                <div className="bar-top" style={{ height: `${100 + Math.random() * 100}px` }}></div>
-                <div className="bar-bottom" style={{ height: `${50 + Math.random() * 50}px` }}></div>
-              </div>
-              <span className="bar-label">{month}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <ResponsiveContainer width="100%" height={250}>
+        <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey="month" tick={{ fill: "#6b7280", fontSize: 12 }} />
+          <YAxis tick={{ fill: "#6b7280", fontSize: 12 }} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "white",
+              borderRadius: "8px",
+              boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          />
+          <Bar dataKey="Insurance" stackId="a" fill="#1E40AF" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="Bonds" stackId="a" fill="#3B82F6" />
+          <Bar dataKey="Stocks" stackId="a" fill="#93C5FD" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
-  )
+  );
 }
-

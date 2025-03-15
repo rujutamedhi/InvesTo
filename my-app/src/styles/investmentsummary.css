@@ -3,7 +3,7 @@
     background-color: white;
     border-radius: 8px;
     border: 1px solid #e5e7eb;
-    padding: 24px;
+    padding: 14px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
   
@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
   
   .investment-summary-title {
@@ -51,7 +51,7 @@
   }
   
   .investment-summary-period {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #6b7280;
     margin: 0;
   }
