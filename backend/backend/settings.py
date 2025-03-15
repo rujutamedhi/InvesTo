@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'backend.urls'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Your React app's development URL
+    "http://localhost:5173",
 ]
 
 TEMPLATES = [
@@ -102,6 +103,7 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': config('MONGO_URI'),
+            # 'host': 'mongodb+srv://2022siddhantsathe:7YTnQfNAlDzbvGl0@cluster0.hfdxa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
             'authSource': 'admin',
             'ssl': True,
             'ssl_cert_reqs': 0,

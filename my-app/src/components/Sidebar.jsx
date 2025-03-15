@@ -21,13 +21,17 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         <ul className="nav-list">
+          <Link to="/dashboard">
           <NavItem icon={HomeIcon()} label="Home" active={true}  />
+          </Link>
           
           <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
           <Link to="/stock-list">
             <NavItem icon={<StocksIcon />} label="Stocks" className="nav-item" />
           </Link>
+          <Link to='/bonds'>
           <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
+          </Link>
         </ul>
 
         <div className="sidebar-section">
