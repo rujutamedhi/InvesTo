@@ -2,6 +2,7 @@
 
 import "../styles/sidebar.css"
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom"
 export default function Sidebar() {
   const navigate = useNavigate();
   return (
@@ -23,7 +24,9 @@ export default function Sidebar() {
           <NavItem icon={HomeIcon()} label="Home" active={true}  />
           
           <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
-          <NavItem icon={StocksIcon()} label="Stocks" className="nav-item" />
+          <Link to="/stock-list">
+            <NavItem icon={<StocksIcon />} label="Stocks" className="nav-item" />
+          </Link>
           <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
         </ul>
 
