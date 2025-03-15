@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar"; // Import Sidebar
 import "./App.css";
 import StockDetails from "./pages/StockDetails";
 import StockList from "./pages/StockList";
+import BondsList from "./pages/BondList";
 import Table from "./components/table"
 function Layout() {
   const location = useLocation(); // Get current route
@@ -25,6 +26,7 @@ function Layout() {
             <Route path="/stock-list" element={<StockList />} />
             <Route path="table" element={<Table/>}/>
             <Route path="/stock/:symbol" element={<StockDetails/>}/>
+            <Route path="/bonds" element={<BondsList />} />
           </Routes>
         </div>
       </div>

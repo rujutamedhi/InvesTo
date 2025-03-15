@@ -5,6 +5,10 @@ from .serializers import UserSerializer
 from .models import User
 import requests
 from django.contrib.auth.hashers import make_password
+# from api.bonds import get_bonds
+import requests  # ✅ Add this if missing
+
+from django.http import JsonResponse
 
 class SignupView(APIView):
     def post(self, request):
@@ -73,3 +77,10 @@ class LoginView(APIView):
                 'email': user.email  
             }, status=status.HTTP_200_OK)
         return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+
+class BondsView(APIView):
+    def get(self, request):
+        response = requests.get(f"https://api.twelvedata.com/bonds?apikey=d1b4c902740849cebfe6d9a88b253800")
+        return Response(response.json(), status=response.status_code)
+    

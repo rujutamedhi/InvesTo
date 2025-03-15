@@ -37,7 +37,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       {/* Sidebar */}
-      <aside className="sidebar">
+      {/* <aside className="sidebar">
         <div className="profile-section">
           <img src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg" alt="Profile" className="profile-pic" />
           <h3>Roland Donald</h3>
@@ -48,11 +48,18 @@ const Profile = () => {
           <button>Login & Password</button>
           <button>Log Out</button>
         </nav>
-      </aside>
+      </aside> */}
 
       {/* Profile Content */}
       <div className="profile-content">
+      
+        
         <h2>Personal Information</h2>
+        <div className="profile-section">
+          <img src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg" alt="Profile" className="profile-pic" />
+          <h3>Roland Donald</h3>
+          {/* <p>Cashier</p> */}
+        </div>
 
         {/* Gender Selection */}
         <div className="gender-selection">
@@ -125,7 +132,14 @@ const Profile = () => {
               <button className="save-btn" onClick={handleSaveChanges}>Save Changes</button>
             </>
           )}
+          
         </div>
+        <nav className="collaboration">
+          <h2>Collaboration</h2>
+          <button className="active">Create Collaboration</button>
+          <button>Login & Password</button>
+          <button>Log Out</button>
+        </nav>
       </div>
     </div>
   );
