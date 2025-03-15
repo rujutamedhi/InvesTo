@@ -37,7 +37,9 @@ const Profile = () => {
   return (
     <div className="profile-container">
       {/* Sidebar */}
+       
       <aside className="sidebar">
+        
         <div className="profile-section">
           <img src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg" alt="Profile" className="profile-pic" />
           <h3>Roland Donald</h3>
