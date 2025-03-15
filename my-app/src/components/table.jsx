@@ -1,5 +1,6 @@
 // This is a single JSX file with all components defined together
 import { Link } from "react-router-dom";
+import "../styles/table.css";
 // Main App Component
 function AnalyticsDashboard() {
     const stocks = [
@@ -15,7 +16,11 @@ function AnalyticsDashboard() {
         
         {/* Main Content */}
         <div style={{ flex: 1, padding: '32px', overflow: 'auto' }}>
-          <h2 style={{ marginBottom: '10px' }}>Details</h2>
+         <div className="buttons" style={{ width: "300px", justifyContent: "space-between", display: "flex", paddingBottom:"10px"}}>
+            <button >Stocks</button>
+            <button>Bonds</button>
+            <button>Insurance</button>
+         </div>
           
           {/* Data Table */}
           <div style={{ border: '1px solid rgb(213, 213, 213)', borderRadius: '6px', overflow: 'hidden' }}>
@@ -27,7 +32,7 @@ function AnalyticsDashboard() {
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Percent Change</th>
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>High price of the day</th>
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Low price of the day</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Average Time</th>
+                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Buying date</th>
                 </tr>
               </thead>
               <tbody>
