@@ -1,8 +1,9 @@
 "use client"
 
 import "../styles/sidebar.css"
-
+import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -44,7 +45,7 @@ export default function Sidebar() {
             <p className="user-name">Riley Carter</p>
             <p className="user-email">riley@email.com</p>
           </div>
-          <button className="user-menu-button">
+          <button className="user-menu-button" onClick={() => navigate("/profile")}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
               <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
             </svg>
@@ -86,65 +87,6 @@ function HomeIcon() {
   )
 }
 
-function AnalyticsIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-      <line x1="3" y1="9" x2="21" y2="9"></line>
-      <line x1="9" y1="21" x2="9" y2="9"></line>
-    </svg>
-  )
-}
-
-function ClientsIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-      <circle cx="9" cy="7" r="4"></circle>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-    </svg>
-  )
-}
-
-function TasksIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M9 11l3 3L22 4"></path>
-      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-    </svg>
-  )
-}
 
 function InsuranceIcon() {
   return (

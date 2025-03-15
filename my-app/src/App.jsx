@@ -1,23 +1,39 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile"; 
+import Sidebar from "./components/Sidebar"; // Import Sidebar
 import "./App.css";
 import StockDetails from "./pages/StockDetails";
 import StockList from "./pages/StockList";
-// Import Components
-import Dashboard from "./components/Dashboard";
-import Analyticsdashboard from "./components/table";
-
-function App() {
-  const [count, setCount] = useState(0);
+import Table from "./components/table"
+function Layout() {
+  const location = useLocation(); // Get current route
+  const showSidebar = location.pathname !== "/"; // Hide sidebar on Home page
 
   return (
-    <Router> {/* ✅ Wrap with Router */}
-      <Routes>
-        <Route path="/" element={<Analyticsdashboard />} />
-        <Route path="/table" element={<Analyticsdashboard />} />
-        <Route path="/stock/:symbol" element={<StockDetails />} />
-        <Route path="/stocklist" element={<StockList />} />
-      </Routes>
+    <div className="app-container">
+      {/* <Navbar />
+      <div className="main-content">
+        {showSidebar && <Sidebar />} Show Sidebar except on Home */}
+        <div className="page-content">
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/stock-list" element={<StockList />} />
+            <Route path="table" element={<Table/>}/>
+            <Route path="Stockdetails" element={<StockDetails/>}/>
+          </Routes>
+        </div>
+      </div>
+    // </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }
