@@ -1,7 +1,12 @@
 // This is a single JSX file with all components defined together
-
+import { Link } from "react-router-dom";
 // Main App Component
 function AnalyticsDashboard() {
+    const stocks = [
+        { name: "Apple Inc", symbol: "AAPL" },
+        { name: "Microsoft", symbol: "MSFT" },
+        { name: "Tesla Motors", symbol: "TSLA" },
+      ];
     return (
         
       <div style={{ display: 'flex', height: '100vh',backgroundColor: 'white' }}>
@@ -27,7 +32,7 @@ function AnalyticsDashboard() {
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Homepage Overview</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><Link to={`/stockdetails`}>Homepage Overview</Link></td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
                     <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#dcfce7', color: '#166534' }}>Online</span>
                   </td>

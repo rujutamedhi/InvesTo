@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-z6a$ti*x-yygigk+73=0xqsjf$t=wk(+j*mx)&$-uz0nxem%y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,9 +32,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',   
+    'corsheaders',
+    'backend'
+    
 ]
 
+
 MIDDLEWARE = [
+    
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Your React app's development URL
+]
 
 TEMPLATES = [
     {
@@ -66,8 +71,25 @@ TEMPLATES = [
         },
     },
 ]
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+AUTHENTICATION_BACKENDS = [
+    'backend.backends.CustomAuthBackend',
+]
 
 
 # Database
@@ -75,11 +97,22 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'Cluster0',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': config('MONGO_URI'),
+            'authSource': 'admin',
+            'ssl': True,
+            'ssl_cert_reqs': 0,
+        }
     }
 }
 
+
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
