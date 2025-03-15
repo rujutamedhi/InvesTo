@@ -7,8 +7,8 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebar-header">
         <div>
-          <h2 className="sidebar-title">Sitemark-web</h2>
-          <p className="sidebar-subtitle">Web app</p>
+          <h2 className="sidebar-title">InvesTo</h2>
+          <p className="sidebar-subtitle">Your investments</p>
         </div>
         <button className="sidebar-menu-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -19,13 +19,11 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         <ul className="nav-list">
-          <NavItem icon={HomeIcon()} label="Home" active={true} />
-          <NavItem icon={AnalyticsIcon()} label="Analytics" />
-          <NavItem icon={ClientsIcon()} label="Clients" />
-          <NavItem icon={TasksIcon()} label="Tasks" />
-          <NavItem icon={InsuranceIcon()} label="Insurance" />
-          <NavItem icon={StocksIcon()} label="Stocks" />
-          <NavItem icon={BondsIcon()} label="Bonds" />
+          <NavItem icon={HomeIcon()} label="Home" active={true}  />
+          
+          <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
+          <NavItem icon={StocksIcon()} label="Stocks" className="nav-item" />
+          <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
         </ul>
 
         <div className="sidebar-section">
