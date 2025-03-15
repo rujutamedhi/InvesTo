@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [currentDate] = useState("Apr 17, 2023")
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" style={{width:"80vw"}}>
       
 
       <div className="main-content">

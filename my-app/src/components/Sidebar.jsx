@@ -10,7 +10,7 @@ export default function Sidebar() {
       <div className="sidebar-header">
         <div>
           <h2 className="sidebar-title">InvesTo</h2>
-          <p className="sidebar-subtitle">Your investments</p>
+          
         </div>
         <button className="sidebar-menu-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
