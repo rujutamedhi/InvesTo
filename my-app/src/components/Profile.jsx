@@ -1,70 +1,134 @@
-import { useState } from "react";
-import "../styles/profile.css"; // Import CSS for styling
+import React, { useState } from "react";
+import "../styles/profile.css";
 
-export default function Profile() {
-  const [user, setUser] = useState({
-    username: "john_doe",
-    email: "john@example.com",
-    phone_number: "9876543210",
-    age: 28,
-    city: "New York",
+const Profile = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileData, setProfileData] = useState({
+    firstName: "Roland",
+    lastName: "Donald",
+    email: "rolandDonald@gmail.com",
+    address: "3605 Parker Rd.",
+    phone: "(405) 555-0128",
+    dob: "1995-02-01",
+    location: "Atlanta, USA",
+    postalCode: "30301",
     gender: "Male",
-    risk_profile: "Medium",
-    wallet_balance: 1500.75,
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({ ...user });
-
-  // Handle Input Change
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData({ ...profileData, [name]: value });
   };
 
-  // Save Changes
-  const handleSave = () => {
-    setUser({ ...formData });
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleSaveChanges = () => {
     setIsEditing(false);
+    console.log("Profile Saved:", profileData);
+  };
+
+  const handleDiscardChanges = () => {
+    setIsEditing(false);
+    console.log("Changes Discarded");
   };
 
   return (
     <div className="profile-container">
-      <h2 className="profile-title">Profile Information</h2>
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="profile-section">
+          <img src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg" alt="Profile" className="profile-pic" />
+          <h3>Roland Donald</h3>
+          <p>Cashier</p>
+        </div>
+        <nav>
+          <button className="active">Create Collaboration</button>
+          <button>Login & Password</button>
+          <button>Log Out</button>
+        </nav>
+      </aside>
 
-      <div className="profile-details">
-        {Object.keys(user).map((key) => (
-          <div key={key} className="profile-row">
-            <label className="profile-label">{key.replace("_", " ")}:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name={key}
-                value={formData[key]}
-                onChange={handleChange}
-                className="profile-input"
-              />
-            ) : (
-              <span className="profile-value">{user[key]}</span>
-            )}
+      {/* Profile Content */}
+      <div className="profile-content">
+        <h2>Personal Information</h2>
+
+        {/* Gender Selection */}
+        <div className="gender-selection">
+          <label>
+            <input type="radio" name="gender" value="Male" checked={profileData.gender === "Male"} disabled={!isEditing} onChange={handleInputChange} />
+            Male
+          </label>
+          <label>
+            <input type="radio" name="gender" value="Female" checked={profileData.gender === "Female"} disabled={!isEditing} onChange={handleInputChange} />
+            Female
+          </label>
+        </div>
+
+        {/* Profile Form */}
+        <div className="form-row">
+          <div className="input-group">
+            <label>First Name</label>
+            <input type="text" name="firstName" value={profileData.firstName} disabled={!isEditing} onChange={handleInputChange} />
           </div>
-        ))}
-      </div>
+          <div className="input-group">
+            <label>Last Name</label>
+            <input type="text" name="lastName" value={profileData.lastName} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+        </div>
 
-      <div className="profile-buttons">
-        {isEditing ? (
-          <button className="save-btn" onClick={handleSave}>
-            Save Changes
-          </button>
-        ) : (
-          <button className="edit-btn" onClick={() => setIsEditing(true)}>
-            Edit Profile
-          </button>
-        )}
-      </div>
+        <div className="form-row">
+          <div className="input-group">
+            <label>Email</label>
+            <input type="email" name="email" value={profileData.email} disabled />
+            <span className="verified">✔ Verified</span>
+          </div>
+        </div>
 
-      <div className="collab-container">
-        <button className="collab-btn">Create a Collaboration Team</button>
+        <div className="form-row">
+          <div className="input-group">
+            <label>Address</label>
+            <input type="text" name="address" value={profileData.address} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="input-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" value={profileData.phone} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+          <div className="input-group">
+            <label>Date of Birth</label>
+            <input type="date" name="dob" value={profileData.dob} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="input-group">
+            <label>Location</label>
+            <input type="text" name="location" value={profileData.location} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+          <div className="input-group">
+            <label>Postal Code</label>
+            <input type="text" name="postalCode" value={profileData.postalCode} disabled={!isEditing} onChange={handleInputChange} />
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="button-group">
+          {!isEditing ? (
+            <button className="edit-btn" onClick={handleEditClick}>Edit</button>
+          ) : (
+            <>
+              <button className="discard-btn" onClick={handleDiscardChanges}>Discard Changes</button>
+              <button className="save-btn" onClick={handleSaveChanges}>Save Changes</button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Profile;
