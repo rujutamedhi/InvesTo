@@ -10,7 +10,7 @@ export default function Sidebar() {
       <div className="sidebar-header">
         <div>
           <h2 className="sidebar-title">InvesTo</h2>
-          <p className="sidebar-subtitle">Your investments</p>
+          
         </div>
         <button className="sidebar-menu-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -21,13 +21,17 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
         <ul className="nav-list">
+          <Link to="/dashboard">
           <NavItem icon={HomeIcon()} label="Home" active={true}  />
+          </Link>
           
           <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
           <Link to="/stock-list">
             <NavItem icon={<StocksIcon />} label="Stocks" className="nav-item" />
           </Link>
+          <Link to='/bonds'>
           <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
+          </Link>
         </ul>
 
         <div className="sidebar-section">

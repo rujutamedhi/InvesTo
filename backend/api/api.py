@@ -54,7 +54,17 @@ def get_stock_details(symbol):
     
     except Exception as e:
         return jsonify({"error": f"Error fetching data for {symbol}: {str(e)}"}), 500
-
+    
+@app.route('/recommendation/<symbol>', methods=['GET'])
+def get_recommendation(symbol):
+    try:
+        recommendations = finnhub_client.recommendation_trends(symbol)  # Fetch recommendation trends
+        if not recommendations:
+            return jsonify({"error": "No recommendation data available"}), 404
+        return jsonify(recommendations)  # Return as JSON list
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 @app.route('/stocks', methods=['GET'])
 def get_all_stocks():
     stock_list = []

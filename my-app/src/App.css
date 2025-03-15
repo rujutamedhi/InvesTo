@@ -12,6 +12,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -116,4 +117,28 @@ a {
 button {
   font-family: inherit;
 }
+
+.app-container {
+  display: flex;
+  height: 100vh; /* Ensures full height */
+}
+
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  height: 100vh; /* Full height */
+  background-color: #f8f9fa;
+  position: fixed; /* Keeps sidebar fixed */
+  left: 0;
+  top: 0;
+  padding: 20px;
+}
+
+.page-content {
+  flex-grow: 1;
+  margin-left: 250px; /* Adjust this based on sidebar width */
+  padding: 20px;
+  overflow-y: auto; /* Enables scrolling if needed */
+  width: calc(100% - 250px);
+}
+
 
