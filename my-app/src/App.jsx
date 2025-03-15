@@ -11,8 +11,10 @@ function Layout() {
   const showSidebar = location.pathname !== "/"; // Hide sidebar on Home page
 
   return (
-    <div className="app-container">
+    <div className="app-container" >
+      <Sidebar/>
       {/* <Navbar />
+      
       <div className="main-content">
         {showSidebar && <Sidebar />} Show Sidebar except on Home */}
         <div className="page-content">
@@ -22,7 +24,7 @@ function Layout() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/stock-list" element={<StockList />} />
             <Route path="table" element={<Table/>}/>
-            <Route path="Stockdetails" element={<StockDetails/>}/>
+            <Route path="/stock/:symbol" element={<StockDetails/>}/>
           </Routes>
         </div>
       </div>

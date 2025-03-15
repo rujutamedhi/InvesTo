@@ -50,30 +50,7 @@ export default function InvestmentSummary() {
         </div>
       </div>
 
-      <div className="investment-chart-container">
-        <div className="investment-chart">
-          <svg viewBox="0 0 100 20" className="area-chart">
-            <path d="M0,10 Q10,5 20,10 T40,10 T60,10 T80,5 T100,10 V20 H0 Z" className="area-path" />
-          </svg>
-
-          {/* Chart lines */}
-          <div className="chart-grid">
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="chart-grid-line"></div>
-            ))}
-          </div>
-        </div>
-
-        {/* X-axis labels */}
-        <div className="chart-labels">
-          <span>Apr 5</span>
-          <span>Apr 10</span>
-          <span>Apr 15</span>
-          <span>Apr 20</span>
-          <span>Apr 25</span>
-          <span>Apr 30</span>
-        </div>
-      </div>
+     
     </div>
   )
 }
