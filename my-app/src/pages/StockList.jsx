@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-
+import '../styles/stocklist.css';
 const StockList = () => {
   const [stocks, setStocks] = useState([]);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ const StockList = () => {
       <div style={{ flex: 1, padding: "32px", backgroundColor: "white", overflow: "auto" }}>
         <h2 style={{ marginBottom: "10px" }}>📊 Stock Market Overview</h2>
         <div style={{ border: "1px solid rgb(213, 213, 213)", borderRadius: "6px", overflow: "hidden" }}>
-          <table style={{ width: "80vw", borderCollapse: "collapse" }}>
+          <table style={{ width: "75vw", borderCollapse: "collapse" }}>
             <thead>
               <tr>
                 <th style={headerStyle}>Name</th>
