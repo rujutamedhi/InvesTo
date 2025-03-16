@@ -48,7 +48,9 @@ export default function Sidebar() {
 
       <div className="sidebar-footer">
       
-        <NavItem icon={ProfileIcon()} label="View Profile" />
+      <Link to="/profile">
+        <NavItem icon={<ProfileIcon />} label="View Profile" />
+      </Link>
           {/* <div className="user-info">
             <p style={{width:"100px"}}>View profile</p>
           </div> */}

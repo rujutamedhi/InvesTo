@@ -121,6 +121,8 @@
     border-radius: 6px;
     font-size: 16px;
     transition: border-color 0.2s;
+    background-color: #ddd;
+    color: #0e0e0e;
   }
   
   input:focus,
@@ -141,6 +143,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    background-color: #fff;
   }
   
   .file-input {
@@ -149,6 +152,7 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
+    background-color: #fff;
   }
   
   .file-input::-webkit-file-upload-button {
