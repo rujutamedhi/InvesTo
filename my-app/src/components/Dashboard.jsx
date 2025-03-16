@@ -30,7 +30,7 @@ export default function Dashboard() {
 
           <div className="stat-cards">
             <StatCard
-              title="Total Invested"
+              title="Stocks"
               value="$250K"
               change="+25%"
               changeType="positive"
@@ -39,7 +39,7 @@ export default function Dashboard() {
             />
 
             <StatCard
-              title="Profit Amount"
+              title="Bonds"
               value="$45K"
               change="-25%"
               changeType="negative"
@@ -48,7 +48,7 @@ export default function Dashboard() {
             />
 
             <StatCard
-              title="Current Balance"
+              title="Insurances"
               value="$280K"
               change="+5%"
               changeType="positive"

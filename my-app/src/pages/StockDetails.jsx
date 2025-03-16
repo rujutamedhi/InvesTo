@@ -3,17 +3,19 @@ import { useParams } from "react-router-dom";
 import { Pie } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import "../styles/stockdetails.css"; // Import CSS file
-
+import { useNavigate } from "react-router-dom";
 // Register Chart.js components
 Chart.register(ArcElement, Tooltip, Legend);
 
 const StockDetails = () => {
+  const navigate = useNavigate();
   const { symbol } = useParams();
   const [stock, setStock] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [selectedPeriod, setSelectedPeriod] = useState("");
   const [error, setError] = useState(null);
 
+ 
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/stockdetails/${symbol}`)
       .then((response) => response.json())
@@ -54,7 +56,7 @@ const StockDetails = () => {
             <tr><td> <b>Exchange</b></td><td>{stock.exchange || "N/A"}</td></tr>
           </tbody>
         </table>
-        <button style={{marginLeft: '33px', marginBottom: '10px'}} >Buy</button>
+        <button style={{marginLeft: '33px', marginBottom: '10px'}} onClick={() => navigate("/buyform", { state: { name: stock.name, price: stock.current_price } })}>Buy</button>
       </div>
 
       {/* Recommendations */}
