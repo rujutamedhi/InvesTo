@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile"; 
 import Sidebar from "./components/Sidebar"; // Import Sidebar
+import SignupForm from "./components/SignUp";
+import {  AuthProvider } from "./context/AuthContext";
+import Login from "./components/Login";
 import "./App.css";
 import StockDetails from "./pages/StockDetails";
 import StockList from "./pages/StockList";
@@ -21,6 +24,7 @@ function Layout() {
       <div className="main-content">
         {showSidebar && <Sidebar />} Show Sidebar except on Home */}
         <div className="page-content">
+          <AuthProvider>
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />

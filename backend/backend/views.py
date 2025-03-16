@@ -1,14 +1,24 @@
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth import authenticate, login
 from .serializers import UserSerializer
+from django.contrib.auth.hashers import check_password 
 from .models import User
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from bson.objectid import ObjectId
+from pymongo import MongoClient
+import json 
+from django.core.serializers import serialize
+from django.contrib.auth.hashers import check_password
+from django.http import JsonResponse
+from django.views import View
 import requests
 from django.contrib.auth.hashers import make_password
-# from api.bonds import get_bonds
-import requests  # ✅ Add this if missing
-
-from django.http import JsonResponse
 
 class SignupView(APIView):
     def post(self, request):
@@ -77,10 +87,3 @@ class LoginView(APIView):
                 'email': user.email  
             }, status=status.HTTP_200_OK)
         return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-    
-
-class BondsView(APIView):
-    def get(self, request):
-        response = requests.get(f"https://api.twelvedata.com/bonds?apikey=d1b4c902740849cebfe6d9a88b253800")
-        return Response(response.json(), status=response.status_code)
-    

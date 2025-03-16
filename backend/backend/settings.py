@@ -91,6 +91,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 AUTHENTICATION_BACKENDS = [
     'backend.backends.CustomAuthBackend',
 ]
+ROOT_URLCONF = 'backend.urls'
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Your React app's development URL
+]
 
 
 # Database
