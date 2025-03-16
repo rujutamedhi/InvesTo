@@ -23,8 +23,9 @@ export default function Sidebar() {
           <Link to="/dashboard">
           <NavItem icon={HomeIcon()} label="Home" active={true}  />
           </Link>
-          
+          <Link to="/insurance">
           <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
+          </Link>
           <Link to="/stock-list">
             <NavItem icon={<StocksIcon />} label="Stocks" className="nav-item" />
           </Link>
@@ -47,7 +48,9 @@ export default function Sidebar() {
 
       <div className="sidebar-footer">
       
-        <NavItem icon={ProfileIcon()} label="View Profile" />
+      <Link to="/profile">
+        <NavItem icon={<ProfileIcon />} label="View Profile" />
+      </Link>
           {/* <div className="user-info">
             <p style={{width:"100px"}}>View profile</p>
           </div> */}

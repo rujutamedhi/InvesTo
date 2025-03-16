@@ -4,7 +4,7 @@ import "../styles/investmentsummary.css"
 
 export default function InvestmentSummary() {
   return (
-    <div className="investment-summary">
+    <div className="investment-summaryy">
       <div className="investment-summary-header">
         <div>
           <h3 className="investment-summary-title">Investment Summary</h3>

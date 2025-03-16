@@ -27,7 +27,7 @@ class User(models.Model):
     city=models.CharField(max_length=50,default='')
     gender = models.CharField(max_length=25)
     risk_profile = models.CharField(max_length=20, choices=[('Low', 'Low'), ('Medium', 'Medium'), ('High', 'High')])
-    wallet_balance = models.DecimalField(max_digits=15, decimal_places=2, default=0.00) 
+    wallet_balance = models.DecimalField(max_digits=15, decimal_places=2, default=5000.00) 
 
    
     def set_password(self, raw_password):
