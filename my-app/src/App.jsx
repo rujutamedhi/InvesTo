@@ -23,7 +23,7 @@ function Layout() {
       <div className="main-content">
         {showSidebar && <Sidebar />} Show Sidebar except on Home */}
         <div className="page-content">
-          <AuthProvider>
+          <AuthProvider/>
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
