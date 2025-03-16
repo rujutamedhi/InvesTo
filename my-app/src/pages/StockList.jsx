@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-
+import '../styles/stocklist.css';
 const StockList = () => {
   const [stocks, setStocks] = useState([]);
   const [error, setError] = useState(null);
