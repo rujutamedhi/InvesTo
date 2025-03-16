@@ -6,6 +6,24 @@ import {Link} from "react-router-dom"
 import Image from "../assets/images/rough.png"
 export default function Sidebar() {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("reached")
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
+      localStorage.removeItem("authToken"); // Example of clearing auth token
+      navigate("/login"); // Redirect to login page
+    }
+  };
+  function NavItem({ icon, label, active, onClick }) {
+    return (
+      <li onClick={onClick} style={{ cursor: "pointer" }}>
+        <a href="#" className={`nav-item ${active ? "active" : ""}`}>
+          {icon}
+          <span>{label}</span>
+        </a>
+      </li>
+    );
+  }
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -47,7 +65,8 @@ export default function Sidebar() {
           <ul className="nav-list">
             <NavItem icon={CollaborationIcon()} label="Collaboration" />
             <NavItem icon={NotificationIcon()} label="Notification" />
-            <NavItem icon={LogoutIcon()} label="Logout" />
+            <NavItem icon={LogoutIcon()} label="Logout" onClick={handleLogout} />
+
           </ul>
         </div> */}
       </nav>

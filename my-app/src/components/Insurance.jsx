@@ -86,13 +86,13 @@ const Insurance = () => {
     return (
         <div className="container">
             <h2>Insurance Policies</h2>
-            <br />
+          
             <table>
                 <thead>
                     <tr>
                         <th>Policy ID</th>
                         <th>Type</th>
-                        <th>Insurer</th>
+                        <th>Insurence</th>
                         <th>Coverage</th>
                         <th>Premium</th>
                         <th>Term (Years)</th>

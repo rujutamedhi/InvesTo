@@ -1,7 +1,7 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState , useContext } from "react";
+import axios from "axios"; // Import Axios
 import logo from "../assets/images/rough.png";
-
+import { AuthContext } from "../context/AuthContext";
 const UserAuthForm = () => {
   const [formData, setFormData] = useState({
     sender_email: "",
@@ -10,7 +10,7 @@ const UserAuthForm = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-
+  const { user } = useContext(AuthContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     let updatedValue = name.includes("authority") ? value.replace(/\D/, "") : value;
@@ -59,6 +59,12 @@ const UserAuthForm = () => {
         <div style={styles.card}>
           <img src={logo} alt="Logo" style={styles.logo} />
           <h2 style={styles.title}>Collaboration Form</h2>
+          <div style={styles.profileBox}>
+            <img src={logo} alt="User Avatar" style={styles.avatar} />
+            <p style={styles.username}>
+              Signed in as <b>{user}</b>
+            </p>
+          </div>
 
           <form onSubmit={handleSubmit} style={styles.form}>
             <label style={styles.label}>Your Email</label>
