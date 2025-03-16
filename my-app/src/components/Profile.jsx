@@ -1,11 +1,12 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom"; // For extracting email from URL
 import "../styles/profile.css";
 import { AuthContext } from "../context/AuthContext";
+
 const Profile = () => {
   const { email } = useParams(); // Extract email from URL
   const [isEditing, setIsEditing] = useState(false);
-  const { login, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
@@ -16,7 +17,8 @@ const Profile = () => {
     location: "",
     postalCode: "",
     gender: "",
-    Name:""
+    Name: "",
+    walletBalance: "", // New Wallet Balance field
   });
 
   // Fetch profile data when the component mounts
@@ -30,7 +32,7 @@ const Profile = () => {
           setProfileData({
             firstName: data.data.username.split(" ")[0] || "",
             lastName: data.data.username.split(" ")[1] || "",
-            Name:data.data.username,
+            Name: data.data.username,
             email: data.data.email,
             address: data.data.address || "",
             phone: data.data.phone_number || "",
@@ -38,6 +40,7 @@ const Profile = () => {
             location: data.data.city || "",
             postalCode: data.data.postal_code || "",
             gender: data.data.gender || "",
+            walletBalance: data.data.wallet_balance || "0", // Store wallet balance
           });
         } else {
           console.error("Profile not found");
@@ -56,10 +59,36 @@ const Profile = () => {
   };
 
   const handleEditClick = () => setIsEditing(true);
-  const handleSaveChanges = () => {
-    setIsEditing(false);
-    console.log("Profile Saved:", profileData);
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/user/profile/${email}`, {
+        method: "PATCH",  // Use PUT or PATCH for updating data
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: profileData.name,
+          phone_number: profileData.phone,
+          
+          location: profileData.location,
+          wallet_balance: profileData.walletBalance,  // Ensure wallet balance is sent
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.status === "success") {
+        alert("Profile updated successfully! ✅");
+        setIsEditing(false);  // Exit edit mode
+      } else {
+        alert("Failed to update profile ❌");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      alert("An error occurred while updating the profile ❌");
+    }
   };
+  
   const handleDiscardChanges = () => setIsEditing(false);
 
   return (
@@ -67,45 +96,49 @@ const Profile = () => {
       <div className="profile-content">
         <h2>Personal Information</h2>
         <div className="profile-section">
-          <img src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg" alt="Profile" className="profile-pic" />
+          <img
+            src="https://i.pinimg.com/736x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg"
+            alt="Profile"
+            className="profile-pic"
+          />
           <h3>{profileData.firstName} {profileData.lastName}</h3>
         </div>
 
-        
+        {/* Profile Form - Two Rows */}
+        <div className="form-grid">
+          <div className="form-row">
+            <div className="input-group">
+              <label>Name</label>
+              <input type="text" name="Name" value={profileData.Name} disabled={!isEditing} onChange={handleInputChange} />
+            </div>
 
-        {/* Profile Form */}
-        <div className="form-row">
-          
-          <div className="input-group">
-            <label>Name</label>
-            <input type="text" name="lastName" value={profileData.Name} disabled={!isEditing} onChange={handleInputChange} />
+            <div className="input-group">
+              <label>Email</label>
+              <input type="email" name="email" value={profileData.email} disabled />
+              <span className="verified">✔ Verified</span>
+            </div>
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="input-group">
-            <label>Email</label>
-            <input type="email" name="email" value={profileData.email} disabled />
-            <span className="verified">✔ Verified</span>
+          <div className="form-row">
+            <div className="input-group">
+              <label>Phone Number</label>
+              <input type="text" name="phone" value={profileData.phone} disabled={!isEditing} onChange={handleInputChange} />
+            </div>
+
+            <div className="input-group">
+              <label>Wallet Balance</label>
+              <input type="text" name="walletBalance" value={profileData.walletBalance} disabled={!isEditing} onChange={handleInputChange} />
+            </div>
           </div>
-        </div>
 
-        
+          <div className="form-row">
+            <div className="input-group">
+              <label>Location</label>
+              <input type="text" name="location" value={profileData.location} disabled={!isEditing} onChange={handleInputChange} />
+            </div>
 
-        <div className="form-row">
-          <div className="input-group">
-            <label>Phone Number</label>
-            <input type="text" name="phone" value={profileData.phone} disabled={!isEditing} onChange={handleInputChange} />
+            
           </div>
-          
-        </div>
-
-        <div className="form-row">
-          <div className="input-group">
-            <label>Location</label>
-            <input type="text" name="location" value={profileData.location} disabled={!isEditing} onChange={handleInputChange} />
-          </div>
-          
         </div>
 
         {/* Buttons */}
@@ -120,6 +153,7 @@ const Profile = () => {
           )}
         </div>
 
+        {/* Collaboration Section */}
         <nav className="collaboration">
           <h2>Collaboration</h2>
           <button className="active">Create Collaboration</button>

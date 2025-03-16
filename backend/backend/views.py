@@ -104,9 +104,20 @@ class UserProfileView(APIView):
                     
                 }
             })
+            
         except User.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'User not found.'})
         
+        
+    def patch(self, request, email):  # Add PATCH method
+        user = User.objects.get(email=email)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data})
+        return Response(serializer.errors, status=400)
+    
+    
 from bson import ObjectId  # ✅ Import ObjectId for MongoDB compatibility
 
 

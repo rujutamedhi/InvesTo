@@ -49,7 +49,7 @@ const Login = () => {
         setShowPopup(true);
         setTimeout(() => {
           setShowPopup(false);
-          navigate("/"); 
+          navigate("/dashboard"); 
         }, 3000);
       } else {
         setErrorMessage(data.message || "Login failed. Please try again.");
