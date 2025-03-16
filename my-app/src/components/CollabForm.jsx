@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState , useContext } from "react";
 import axios from "axios"; // Import Axios
 import logo from "../assets/images/rough.png";
-
+import { AuthContext } from "../context/AuthContext";
 const UserAuthForm = () => {
   const [formData, setFormData] = useState({ username: "", authority: "" });
   const [loading, setLoading] = useState(false); // To show loading state
-
+(false);
+  const { user } = useContext(AuthContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
     let updatedValue = name === "authority" ? value.replace(/\D/, "") : value; // Only allow numbers for authority
@@ -66,7 +67,7 @@ const UserAuthForm = () => {
           <div style={styles.profileBox}>
             <img src={logo} alt="User Avatar" style={styles.avatar} />
             <p style={styles.username}>
-              Signed in as <b>@yourusername</b>
+              Signed in as <b>{user}</b>
             </p>
           </div>
 
