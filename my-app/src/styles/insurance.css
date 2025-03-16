@@ -2,11 +2,16 @@
 
 /* Styling for the title */
 h2 {
+    padding-top: 5px;
+    padding-left: 35px;
     font-size: 24px;
-    font-weight: bold;
     margin-bottom: 20px; /* Ensures space below title */
 }
-
+.container{
+    padding: 2px;
+    margin: 2px;
+    display: block;
+}
 /* Styling for the table container */
 .table-container {
     width: 100%;
@@ -17,13 +22,15 @@ h2 {
 
 /* Table styling */
 table {
-    width: 90%;
+    width: 92%;
     border-collapse: collapse;
     background: white;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 10%;
+    margin-top: 7px;
+    margin: auto;
+    margin-bottom: 7px;
 }
 
 /* Table header */
@@ -32,13 +39,14 @@ th {
     color: white;
     padding: 10px;
     text-align: left;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 /* Table rows */
 td {
-    padding: 10px;
+    padding: 3px;
     border-bottom: 1px solid #ddd;
+    font-size: 12px;
 }
 
 /* Zebra striping */
@@ -67,6 +75,9 @@ th, td {
     cursor: pointer;
     font-size: 14px;
     transition: background 0.3s;
+    width: 80px;
+    font-size: 12px;
+    margin-right: 5px;
 }
 
 .buy-btn:hover {
