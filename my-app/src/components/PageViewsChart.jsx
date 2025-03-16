@@ -21,7 +21,7 @@ export default function StocksChart() {
           <p className="total-value">1.3M</p>
           <span className="value-change negative">-8%</span>
         </div>
-        <p className="pageviews-chart-period">Page views and Bonds for the last 6 months</p>
+        
       </div>
 
       <ResponsiveContainer width="100%" height={250}>

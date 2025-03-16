@@ -32,7 +32,7 @@ function AnalyticsDashboard() {
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Percent Change</th>
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>High price of the day</th>
                   <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Low price of the day</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Buying date</th>
+                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}></th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +44,7 @@ function AnalyticsDashboard() {
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>212423</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>8345</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>18.5</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>2m 15s</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
                 </tr>
                 <tr>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Product Details - Gadgets</td>
@@ -54,7 +54,7 @@ function AnalyticsDashboard() {
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>172240</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>5653</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>9.7</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>2m 30s</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
                 </tr>
                 <tr>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Checkout Process - Step 1</td>
@@ -64,7 +64,7 @@ function AnalyticsDashboard() {
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>58240</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3455</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>15.2</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>2m 10s</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
                 </tr>
                 <tr>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>User Profile Dashboard</td>
@@ -74,7 +74,7 @@ function AnalyticsDashboard() {
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>96240</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>112543</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>4.5</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>2m 40s</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button style={{backgroundColor: "grey"}}>Sell</button></td>
                 </tr>
                 <tr>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Article Listing - Tech News</td>
@@ -84,7 +84,7 @@ function AnalyticsDashboard() {
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>142240</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3653</td>
                   <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3.1</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>2m 55s</td>
+                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
                 </tr>
               </tbody>
             </table>
