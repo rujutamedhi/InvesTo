@@ -13,6 +13,7 @@ import Table from "./components/table"
 import Collabform from "./components/CollabForm";
 import Buyform from "./components/buyform";
 import Suggestions from "./components/Suggestion";
+import { WalletProvider } from "./context/WalletContext";
 
 function Layout() {
   const location = useLocation(); 
@@ -23,6 +24,7 @@ function Layout() {
       {!hideSidebar && <Sidebar />} 
       
       <div className="page-content">
+      <WalletProvider>
         <AuthProvider>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -38,6 +40,7 @@ function Layout() {
             <Route path="/buyform" element={<Buyform />} />
           </Routes>
         </AuthProvider>
+        </WalletProvider>
       </div>
     </div>
   );

@@ -1,94 +1,125 @@
 import { useState } from "react";
+import axios from "axios"; // Import Axios
+import logo from "../assets/images/rough.png";
 
 const UserAuthForm = () => {
   const [formData, setFormData] = useState({ username: "", authority: "" });
+  const [loading, setLoading] = useState(false); // To show loading state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let updatedValue = value.replace(/\D/, ""); // Only allow numbers
-
+    let updatedValue = name === "authority" ? value.replace(/\D/, "") : value; // Only allow numbers for authority
     setFormData({ ...formData, [name]: updatedValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+    setLoading(true); // Show loading state
+
+    try {
+      const response = await axios.post("http://localhost:5006/create-collaboration", formData);
+
+      console.log("Response:", response.data);
+      alert("Collaboration Created Successfully!");
+    } catch (error) {
+      console.error("Error:", error.response?.data);
+      alert("Failed to create collaboration.");
+    } finally {
+      setLoading(false); // Hide loading state
+    }
   };
 
-  const partnerAuthority = formData.authority
-    ? Math.max(0, 100 - parseInt(formData.authority))
-    : 100;
+  const emailNotification = () => {
+    fetch("http://localhost:5006/application-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        schemename: formData.scheme_name,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Failed to send email");
+      })
+      .then((data) => {
+        alert(data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error sending email");
+      });
+  };
+
+  const partnerAuthority = formData.authority ? Math.max(0, 100 - parseInt(formData.authority)) : 100;
 
   return (
     <div style={styles.outercontainer}>
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <img
-          src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-          alt="GitHub Logo"
-          style={styles.logo}
-        />
-        <h2 style={styles.title}>Collaboration Form</h2>
-        <div style={styles.profileBox}>
-          <img
-            src="https://avatars.githubusercontent.com/u/9919?v=4"
-            alt="User Avatar"
-            style={styles.avatar}
-          />
-          <p style={styles.username}>Signed in as <b>@yourusername</b></p>
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <img src={logo} alt="Logo" style={styles.logo} />
+          <h2 style={styles.title}>Collaboration Form</h2>
+          <div style={styles.profileBox}>
+            <img src={logo} alt="User Avatar" style={styles.avatar} />
+            <p style={styles.username}>
+              Signed in as <b>@yourusername</b>
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} style={styles.form}>
+            <label style={styles.label}>Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              style={styles.input}
+            />
+
+            <div style={styles.labelContainer}>
+              <label style={styles.label}>Your Authority Value</label>
+              <span style={styles.tooltipIcon} title="This defines how much authority you have in collaboration.">
+                ℹ️
+              </span>
+            </div>
+            <input
+              type="number"
+              name="authority"
+              value={formData.authority}
+              onChange={handleChange}
+              required
+              min="0"
+              max="100"
+              style={styles.input}
+            />
+
+            <div style={styles.labelContainer}>
+              <label style={styles.label}>Partner's Authority Value</label>
+              <span style={styles.tooltipIcon} title="This defines how much authority your partner has in collaboration.">
+                ℹ️
+              </span>
+            </div>
+            <input type="number" value={partnerAuthority} disabled style={styles.inputDisabled} />
+
+            <button type="submit" style={styles.button} disabled={loading} onClick={handleSubmit}>
+              {loading ? "Creating..." : "Invite Collaborator"}
+            </button>
+          </form>
         </div>
-
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <label style={styles.label}>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-
-          <div style={styles.labelContainer}>
-            <label style={styles.label}>Your Authority Value</label>
-            <span style={styles.tooltipIcon} title="This defines how much authority you have in collaboration.">ℹ️</span>
-          </div>
-          <input
-            type="number"
-            name="authority"
-            value={formData.authority}
-            onChange={handleChange}
-            required
-            min="0"
-            max="100"
-            style={styles.input}
-          />
-
-          <div style={styles.labelContainer}>
-            <label style={styles.label}>Partner's Authority Value</label>
-            <span style={styles.tooltipIcon} title="This defines how much authority your partner has in collaboration.">ℹ️</span>
-          </div>
-          <input
-            type="number"
-            value={partnerAuthority}
-            disabled
-            style={styles.inputDisabled}
-          />
-
-          <button type="submit" style={styles.button}>Invite Collaborator</button>
-        </form>
-
-        
       </div>
-    </div>
     </div>
   );
 };
 
 const styles = {
-    outercontainer:{
-     width: "80vw"
-    },
+  outercontainer: {
+    width: "80vw",
+  },
   container: {
     display: "flex",
     justifyContent: "center",
@@ -178,19 +209,6 @@ const styles = {
     borderRadius: "6px",
     cursor: "pointer",
     fontSize: "16px",
-    display: "block",
-    alignItems:"center",
-    
-    
-  },
-  tip: {
-    marginTop: "15px",
-    fontSize: "12px",
-    color: "#666",
-  },
-  link: {
-    color: "#007bff",
-    textDecoration: "none",
   },
 };
 
