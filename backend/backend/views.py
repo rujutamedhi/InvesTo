@@ -18,12 +18,57 @@ from django.contrib.auth.hashers import check_password
 from django.http import JsonResponse
 from django.views import View
 import requests
+from django.contrib.auth.hashers import make_password
 
-from django.views import View
-from django.http import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-import json
+class SignupView(APIView):
+    def post(self, request):
+        data = request.data
+
+        # Extract PAN & Aadhaar files from request (Temporary Processing)
+        pan_card = request.FILES.get("pan_card")
+        aadhaar_card = request.FILES.get("aadhaar_card")
+
+        if not pan_card or not aadhaar_card:
+            return Response({"message": "PAN and Aadhaar verification required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Gemini API for Document OCR (Temporary Processing)
+        gemini_api_key = "IzaSyCK1CEVeImXWsT_VwXcHAW3G_YGhJAGWH8"
+        headers = {"Authorization": f"Bearer {gemini_api_key}"}
+
+        # PAN Card Verification (OCR Extraction)
+        pan_response = requests.post(
+            "https://gemini-api.com/extract_text",
+            headers=headers,
+            files={"file": pan_card}
+        ).json()
+
+        # Aadhaar Card Verification (OCR Extraction)
+        aadhaar_response = requests.post(
+            "https://gemini-api.com/extract_text",
+            headers=headers,
+            files={"file": aadhaar_card}
+        ).json()
+
+        # Extract names from PAN & Aadhaar
+        extracted_pan_name = pan_response.get("name", "").strip()
+        extracted_aadhaar_name = aadhaar_response.get("name", "").strip()
+        entered_name = data.get("username", "").strip()
+
+        # Name Matching Validation
+        if entered_name.lower() != extracted_pan_name.lower() or entered_name.lower() != extracted_aadhaar_name.lower():
+            return Response({"message": "Name mismatch! Registration denied."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Hash password before storing
+        data["password"] = make_password(data["password"])
+
+        # Save user (Without storing documents)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User registered successfully!"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LoginView(APIView):
     def post(self, request):
@@ -42,45 +87,3 @@ class LoginView(APIView):
                 'email': user.email  
             }, status=status.HTTP_200_OK)
         return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-
-FLASK_SERVER_URL = "http://127.0.0.1:5500/verify-documents" 
-
-class SignupView(APIView):
-    def post(self, request):
-        data = request.data
-
-        pan_card = request.FILES.get("pan_card")
-        aadhaar_card = request.FILES.get("aadhaar_card")
-
-        if not pan_card or not aadhaar_card:
-            return Response({"message": "PAN and Aadhaar required"}, status=status.HTTP_400_BAD_REQUEST)
-        files = {
-            "pan_card": pan_card,
-            "aadhaar_card": aadhaar_card
-        }
-        payload = {"username": data.get("username", "").strip()}
-
-        try:
-            response = requests.post(FLASK_SERVER_URL, files=files, data=payload)
-            result = response.json()
-
-            if response.status_code != 200 or result.get("status") != "verified":
-                return Response({"message": "Verification failed. " + result.get("reason", "Unknown error")},
-                                status=status.HTTP_400_BAD_REQUEST)
-
-
-
-            
-            serializer = UserSerializer(data=data)
-            if serializer.is_valid():
-             user = serializer.save()
-             print("User created successfully:", user)
-             return Response({"message": "User registered successfully!"}, status=status.HTTP_201_CREATED)
-            else :
-              print("Signup Error:", serializer.errors)
-              return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        except requests.exceptions.RequestException as e:
-            return Response({"error": "Flask server error: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-

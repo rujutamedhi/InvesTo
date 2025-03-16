@@ -2,36 +2,42 @@
 
 import "../styles/sidebar.css"
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom"
+import Image from "../assets/images/rough.png"
 export default function Sidebar() {
   const navigate = useNavigate();
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <div>
-          <h2 className="sidebar-title">InvesTo</h2>
-          <p className="sidebar-subtitle">Your investments</p>
-        </div>
+        
+          <h2 className="sidebar-title" style={{margin:"auto"}}>InvesTo</h2>
+          
+        
         <button className="sidebar-menu-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-          </svg>
+        <img src={Image} alt="Rough Example" style={{ width: "42px", height: "auto" }} />
         </button>
       </div>
 
       <nav className="sidebar-nav">
         <ul className="nav-list">
+          <Link to="/dashboard">
           <NavItem icon={HomeIcon()} label="Home" active={true}  />
+          </Link>
           
           <NavItem icon={InsuranceIcon()} label="Insurance" className="nav-item" />
-          <NavItem icon={StocksIcon()} label="Stocks" className="nav-item" />
+          <Link to="/stock-list">
+            <NavItem icon={<StocksIcon />} label="Stocks" className="nav-item" />
+          </Link>
+          <Link to='/bonds'>
           <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
+          </Link>
         </ul>
 
         <div className="sidebar-section">
           <ul className="nav-list">
-            <NavItem icon={SettingsIcon()} label="Settings" />
-            <NavItem icon={AboutIcon()} label="About" />
-            <NavItem icon={FeedbackIcon()} label="Feedback" />
+            <NavItem icon={CollaborationIcon()} label="Collaboration" />
+            <NavItem icon={NotificationIcon()} label="Notification" />
+            <NavItem icon={LogoutIcon()} label="Logout" />
           </ul>
         </div>
       </nav>
@@ -144,8 +150,7 @@ function BondsIcon() {
     </svg>
   )
 }
-
-function SettingsIcon() {
+function CollaborationIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -158,13 +163,14 @@ function SettingsIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="12" cy="12" r="3"></circle>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      <circle cx="18" cy="15" r="3"></circle>
+      <circle cx="6" cy="15" r="3"></circle>
+      <path d="M12 3v6M9 6h6M6 18h12M3 21h18"></path>
     </svg>
-  )
+  );
 }
 
-function AboutIcon() {
+function NotificationIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -177,14 +183,12 @@ function AboutIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="12" cy="12" r="10"></circle>
-      <line x1="12" y1="16" x2="12" y2="12"></line>
-      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      <path d="M18 8A6 6 0 0 0 6 8v5a4 4 0 0 1-2 3h16a4 4 0 0 1-2-3z"></path>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
     </svg>
-  )
+  );
 }
-
-function FeedbackIcon() {
+function LogoutIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -197,8 +201,13 @@ function FeedbackIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      <path d="M15 17l5-5-5-5"></path>
+      <path d="M20 12H9"></path>
+      <path d="M4 4v16"></path>
     </svg>
-  )
+  );
 }
+
+
+
 
