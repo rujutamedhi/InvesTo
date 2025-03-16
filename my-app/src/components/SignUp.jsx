@@ -72,7 +72,7 @@ const SignupForm = () => {
   const progressPercentage = (step / 3) * 100;
 
   return (
-    <div style={{width:"100vw"}}>
+    <div style={{width:"80vw"}}>
     <div className="signup-page"> 
       <div className="signup-card">
         <div className="card-header">
