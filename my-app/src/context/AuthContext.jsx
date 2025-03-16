@@ -23,6 +23,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Logs in a user by setting the user state with the provided user data.
+ *
+ * @param {Object} userData - The user data to be set in the state.
+ */
+
+/******  7b116406-31bf-435a-b51a-4ad500f42221  *******/
   const login = (userData) => {
     setUser(userData);
   };

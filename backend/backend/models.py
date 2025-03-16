@@ -37,3 +37,23 @@ class User(models.Model):
         return self.username
     
 
+class CollaborationRequest(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_requests")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="received_requests")
+    sender_authority = models.IntegerField()
+    receiver_authority = models.IntegerField()
+    status = models.CharField(max_length=20, choices=[("pending", "Pending"), ("accepted", "Accepted"), ("rejected", "Rejected")])
+
+    def __str__(self):
+        return f"{self.sender.email} -> {self.receiver.email} ({self.status})"
+
+
+class JointAccount(models.Model):
+    user1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="joint_accounts_as_user1")
+    user2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="joint_accounts_as_user2")
+    authority1 = models.IntegerField()
+    authority2 = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Joint Account: {self.user1.email} & {self.user2.email}"

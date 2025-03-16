@@ -4,7 +4,7 @@ import styles from "../styles/login.module.css";
 import Loginimg from "../images/rough.png";
 import { useAuth } from "../context/AuthContext";
 const Login = () => {
-  const { login } = useAuth();
+  const { login,user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
  
@@ -38,11 +38,12 @@ const Login = () => {
       console.log("data:", data);
 
       if (response.ok) {
-        localStorage.setItem("authToken", data.authToken); 
+        localStorage.setItem("authToken", data.authToken);
         console.log("&&&")
         console.log(data.email)
         console.log("***")
-        
+        console.log("user")
+        console.log(user)
         login(data.email);
          
         setShowPopup(true);
