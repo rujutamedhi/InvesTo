@@ -117,6 +117,13 @@ class UserProfileView(APIView):
             return Response({"status": "success", "data": serializer.data})
         return Response(serializer.errors, status=400)
     
+
+
+class BondsView(APIView):
+    def get(self, request):
+        response = requests.get(f"https://api.twelvedata.com/bonds?apikey=d1b4c902740849cebfe6d9a88b253800")
+        return Response(response.json(), status=response.status_code)
+    
     
 from bson import ObjectId  # ✅ Import ObjectId for MongoDB compatibility
 
