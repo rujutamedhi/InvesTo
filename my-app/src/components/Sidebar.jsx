@@ -35,15 +35,21 @@ export default function Sidebar() {
           <Link to="/suggestion">
           <NavItem icon={HomeIcon()} label="Suggestions" className="nav-item"  />
           </Link>
+          <Link to="/mynotifications">
+          <NavItem icon={NotificationIcon()} label="Notification" className="nav-item"  />
+          </Link>
+          <Link to="/collabform">
+          <NavItem icon={CollaborationIcon()} label="Collaboration" className="nav-item"  />
+          </Link>
         </ul>
 
-        <div className="sidebar-section">
+        {/* <div className="sidebar-section">
           <ul className="nav-list">
             <NavItem icon={CollaborationIcon()} label="Collaboration" />
             <NavItem icon={NotificationIcon()} label="Notification" />
             <NavItem icon={LogoutIcon()} label="Logout" />
           </ul>
-        </div>
+        </div> */}
       </nav>
 
       <div className="sidebar-footer">

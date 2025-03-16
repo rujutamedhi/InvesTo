@@ -15,6 +15,7 @@ import Buyform from "./components/buyform";
 import Suggestions from "./components/Suggestion";
 import { WalletProvider } from "./context/WalletContext";
 import Insurance from "./components/Insurance";
+import CollaborationRequests from "./components/collab"
 
 function Layout() {
   const location = useLocation(); 
@@ -40,6 +41,7 @@ function Layout() {
             <Route path="/collabform" element={<Collabform />} />
             <Route path="/buyform" element={<Buyform />} />
             <Route path="/insurance" element={<Insurance />} />
+            <Route path='/mynotifications' element={<CollaborationRequests />} />
           </Routes>
         </AuthProvider>
         </WalletProvider>
