@@ -12,7 +12,7 @@ import BondsList from "./pages/BondList";
 import Table from "./components/table"
 import Collabform from "./components/CollabForm";
 import Buyform from "./components/buyform";
-
+import Suggestions from "./components/Suggestion";
 
 function Layout() {
   const location = useLocation(); 
@@ -35,6 +35,7 @@ function Layout() {
             <Route path="table" element={<Table/>}/>
             <Route path="/stock/:symbol" element={<StockDetails/>}/>
             <Route path="/bonds" element={<BondsList />} />
+            <Route path="/suggestion" element={<Suggestions/>}/>
             <Route path="/collabform" element={<Collabform/>}/>
             <Route path="/buyform" element={<Buyform/>}/>
             </Routes>
