@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+import base64
+import os
+=======
 # import base64
 # import os
 # from google import genai
@@ -55,11 +59,20 @@ import os
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+>>>>>>> 24be2d68f3c7da5bc1ba718880c8dd14a2a399a1
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
+<<<<<<< HEAD
+
+
+def generate(budget, risk):
+    client = genai.Client(
+        # api_key=os.environ.get("GEMINI_API_KEY"),
+        api_key = "AIzaSyBzTDbvM9cHX-skFhedFMGVjjxzwMxwU7Q",
+=======
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -144,6 +157,7 @@ import re
 def generate(budget, risk):
     client = genai.Client(
         api_key=os.environ.get("GEMINI_API_KEY"),
+>>>>>>> 24be2d68f3c7da5bc1ba718880c8dd14a2a399a1
     )
 
     model = "gemini-2.0-pro-exp-02-05"
@@ -157,6 +171,12 @@ def generate(budget, risk):
     Fundamental Analysis: EPS, P/E ratio, ROE, Revenue Growth, Debt-to-Equity, Free Cash Flow.
     Technical Analysis: RSI, MACD, Moving Averages (50-day, 200-day), Bollinger Bands, Trading Volume.
     Market Sentiment: Recent news, social media trends, institutional holdings.
+<<<<<<< HEAD
+    Based on the users budget and risk profile, suggest 3-5 stocks. Categorize them as safe (low volatility), balanced (moderate risk-reward), and high-risk (growth/momentum). Provide reasoning for each recommendation. dont explain the technical analysis in detail, just mention the indicators used and the conclusion. keep it simmple and concise within 200 words."""),
+            ],
+        ),
+    ]
+=======
 
     Based on the user's budget and risk profile, suggest 3-5 stocks. Categorize them as:
     - **Safe:** (low volatility)
@@ -177,6 +197,7 @@ def generate(budget, risk):
         ),
     ]
 
+>>>>>>> 24be2d68f3c7da5bc1ba718880c8dd14a2a399a1
     generate_content_config = types.GenerateContentConfig(
         temperature=1,
         top_p=0.95,
@@ -185,6 +206,22 @@ def generate(budget, risk):
         response_mime_type="text/plain",
     )
 
+<<<<<<< HEAD
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        
+        config=generate_content_config,
+    ):
+        
+        print(chunk.text, end="")
+        response = chunk.text
+        # return response.json()
+        return chunk.text
+
+if __name__ == "__main__":
+    generate(2000,'medium')
+=======
     response_text = ""  # Initialize response storage
 
     for chunk in client.models.generate_content_stream(
@@ -208,3 +245,4 @@ if __name__ == "__main__":
     # print(generate(2000, "medium"))  # Test the function
     app.run(debug=True, port=5501)
 
+>>>>>>> 24be2d68f3c7da5bc1ba718880c8dd14a2a399a1

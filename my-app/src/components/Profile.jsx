@@ -65,32 +65,41 @@ const Profile = () => {
   const handleEditClick = () => setIsEditing(true);
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/user/profile/${email}`, {
-        method: "PATCH",  // Use PUT or PATCH for updating data
+      const response = await fetch(`http://127.0.0.1:8000/api/user/profile/${user}`, {  // ✅ Removed extra comma
+        method: "PATCH",  // ✅ Correct method for partial updates
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: profileData.name,
           phone_number: profileData.phone,
-          
           location: profileData.location,
-          wallet_balance: profileData.walletBalance,  // Ensure wallet balance is sent
+          wallet_balance: profileData.walletBalance,  // ✅ Ensure correct field names
         }),
       });
-  
-      const data = await response.json();
-  
-      if (data.status === "success") {
-        alert("Profile updated successfully! ✅");
-        setIsEditing(false);  // Exit edit mode
-      } else {
-        alert("Failed to update profile ❌");
+    
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
+    
+      const data = await response.json();
+      console.log("Profile updated successfully:", data);
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("An error occurred while updating the profile ❌");
     }
+    
+  //     const data = await response.json();
+  
+  //     if (data.status === "success") {
+  //       alert("Profile updated successfully! ✅");
+  //       setIsEditing(false);  // Exit edit mode
+  //     } else {
+  //       alert("Failed to update profile ❌");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //     alert("An error occurred while updating the profile ❌");
+  //   };
   };
   
   const handleDiscardChanges = () => setIsEditing(false);

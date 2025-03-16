@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import SignupView, LoginView, CollaborationRequestView, UserProfileView, BondsView
+from .views import SignupView, LoginView, CollaborationRequestView, UserProfileView, BondsView, update_wallet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/collaboration-request/', CollaborationRequestView.as_view(), name='collaboration-request'),
     path('api/user/profile/<str:email>', UserProfileView.as_view(), name='user-profile'),
     path('api/bonds/', BondsView.as_view(), name='bonds'),
+    path("api/user/update-wallet/<str:email>", update_wallet, name="update-wallet"),
 ]
