@@ -7,7 +7,8 @@ import StockDetails from "./pages/StockDetails";
 import StockList from "./pages/StockList";
 import BondsList from "./pages/BondList";
 import Table from "./components/table"
-import Collabform from "./components/CollabForm"
+import Collabform from "./components/CollabForm";
+import Buyform from "./components/buyform";
 function Layout() {
   const location = useLocation(); // Get current route
   const showSidebar = location.pathname !== "/"; // Hide sidebar on Home page
@@ -28,7 +29,8 @@ function Layout() {
             <Route path="table" element={<Table/>}/>
             <Route path="/stock/:symbol" element={<StockDetails/>}/>
             <Route path="/bonds" element={<BondsList />} />
-            <Route path="collabform" element={<Collabform/>}/>
+            <Route path="/collabform" element={<Collabform/>}/>
+            <Route path="/buyform" element={<Buyform/>}/>
           </Routes>
         </div>
       </div>

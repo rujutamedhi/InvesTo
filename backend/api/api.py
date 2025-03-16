@@ -28,7 +28,7 @@ def get_stock(symbol):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-STOCK_SYMBOLS = ["AAPL", "GOOGL", "TSLA", "AMZN", "MSFT"]
+STOCK_SYMBOLS = ["AAPL", "GOOGL", "TSLA", "AMZN", "MSFT", "META", "NVDA", "NFLX", "IBM", "ORCL", "AMD", "INTC"]
 @app.route('/stockdetails/<symbol>', methods=['GET'])
 def get_stock_details(symbol):
     try:
