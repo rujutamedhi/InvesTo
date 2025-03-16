@@ -2,8 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom"; // For extracting email from URL
 import "../styles/profile.css";
 import { AuthContext } from "../context/AuthContext";
-
+import { WalletContext } from "../context/WalletContext"; // Import Wallet Context
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
+  const navigate = useNavigate();
+  const { walletBalance, setWalletBalance } = useContext(WalletContext);
   const { email } = useParams(); // Extract email from URL
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useContext(AuthContext);
@@ -42,6 +45,7 @@ const Profile = () => {
             gender: data.data.gender || "",
             walletBalance: data.data.wallet_balance || "0", // Store wallet balance
           });
+          setWalletBalance(data.data.wallet_balance || "0");
         } else {
           console.error("Profile not found");
         }
@@ -51,7 +55,7 @@ const Profile = () => {
     };
 
     fetchProfile();
-  }, [email]);
+  }, [email,  setWalletBalance]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -165,7 +169,7 @@ const Profile = () => {
         {/* Collaboration Section */}
         <nav className="collaboration">
           <h2>Collaboration</h2>
-          <button className="active">Create Collaboration</button>
+          <button className="active" onClick={() => navigate("/collabform")}>Create Collaboration</button>
           <button>Login & Password</button>
           <button>Log Out</button>
         </nav>
