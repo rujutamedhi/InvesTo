@@ -16,6 +16,7 @@ const Profile = () => {
     location: "",
     postalCode: "",
     gender: "",
+    Name:""
   });
 
   // Fetch profile data when the component mounts
@@ -29,6 +30,7 @@ const Profile = () => {
           setProfileData({
             firstName: data.data.username.split(" ")[0] || "",
             lastName: data.data.username.split(" ")[1] || "",
+            Name:data.data.username,
             email: data.data.email,
             address: data.data.address || "",
             phone: data.data.phone_number || "",
@@ -69,27 +71,14 @@ const Profile = () => {
           <h3>{profileData.firstName} {profileData.lastName}</h3>
         </div>
 
-        {/* Gender Selection */}
-        <div className="gender-selection">
-          <label>
-            <input type="radio" name="gender" value="Male" checked={profileData.gender === "Male"} disabled={!isEditing} onChange={handleInputChange} />
-            Male
-          </label>
-          <label>
-            <input type="radio" name="gender" value="Female" checked={profileData.gender === "Female"} disabled={!isEditing} onChange={handleInputChange} />
-            Female
-          </label>
-        </div>
+        
 
         {/* Profile Form */}
         <div className="form-row">
+          
           <div className="input-group">
-            <label>First Name</label>
-            <input type="text" name="firstName" value={profileData.firstName} disabled={!isEditing} onChange={handleInputChange} />
-          </div>
-          <div className="input-group">
-            <label>Last Name</label>
-            <input type="text" name="lastName" value={profileData.lastName} disabled={!isEditing} onChange={handleInputChange} />
+            <label>Name</label>
+            <input type="text" name="lastName" value={profileData.Name} disabled={!isEditing} onChange={handleInputChange} />
           </div>
         </div>
 
@@ -101,22 +90,14 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="form-row">
-          <div className="input-group">
-            <label>Address</label>
-            <input type="text" name="address" value={profileData.address} disabled={!isEditing} onChange={handleInputChange} />
-          </div>
-        </div>
+        
 
         <div className="form-row">
           <div className="input-group">
             <label>Phone Number</label>
             <input type="text" name="phone" value={profileData.phone} disabled={!isEditing} onChange={handleInputChange} />
           </div>
-          <div className="input-group">
-            <label>Date of Birth</label>
-            <input type="date" name="dob" value={profileData.dob} disabled={!isEditing} onChange={handleInputChange} />
-          </div>
+          
         </div>
 
         <div className="form-row">
@@ -124,10 +105,7 @@ const Profile = () => {
             <label>Location</label>
             <input type="text" name="location" value={profileData.location} disabled={!isEditing} onChange={handleInputChange} />
           </div>
-          <div className="input-group">
-            <label>Postal Code</label>
-            <input type="text" name="postalCode" value={profileData.postalCode} disabled={!isEditing} onChange={handleInputChange} />
-          </div>
+          
         </div>
 
         {/* Buttons */}
