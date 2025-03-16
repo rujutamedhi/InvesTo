@@ -121,7 +121,45 @@ class UserProfileView(APIView):
 from bson import ObjectId  # ✅ Import ObjectId for MongoDB compatibility
 
 
+@csrf_exempt
+def update_wallet(request, email):
+    if request.method == "POST":  # ✅ Use POST to update wallet
+        try:
+            data = json.loads(request.body)
+            new_balance = data.get("new_balance")
 
+            if new_balance is None:
+                return JsonResponse({"error": "New balance is required"}, status=400)
+
+            print(f"Updating wallet for: {email}, New Balance: {new_balance}")  # ✅ Debugging
+
+            # ✅ Use `get()` instead of `get_or_create()` to prevent new entry creation
+            user = User.objects.filter(email=email).first()  # Gets the first matching user
+
+            if user:
+                print(f"User found. Updating balance...")  # ✅ Debugging
+                user.wallet_balance = new_balance
+                user.save()
+            else:
+                print(f"User not found. Creating new user...")  # ✅ Debugging
+                user = User.objects.create(email=email, wallet_balance=new_balance)
+
+                # ✅ Delete previous duplicate entries (if any exist)
+                User.objects.filter(email=email).delete()
+
+            return JsonResponse(
+                {"message": "Wallet updated", "new_balance": user.wallet_balance},
+                status=200
+            )
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON format"}, status=400)
+
+        except Exception as e:
+            print(f"Error updating wallet: {e}")  # ✅ Debugging
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 class CollaborationRequestView(APIView):
