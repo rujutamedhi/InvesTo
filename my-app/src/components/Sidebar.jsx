@@ -31,6 +31,9 @@ export default function Sidebar() {
           <Link to='/bonds'>
           <NavItem icon={BondsIcon()} label="Bonds" className="nav-item" />
           </Link>
+          <Link to="/suggestion">
+          <NavItem icon={HomeIcon()} label="Suggestions" className="nav-item"  />
+          </Link>
         </ul>
 
         <div className="sidebar-section">

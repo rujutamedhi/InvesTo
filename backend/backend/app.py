@@ -3,13 +3,15 @@ from flask_cors import CORS
 import google.generativeai as genai
 import os
 import re
+from pymongo import MongoClient
 from dotenv import load_dotenv  
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = os.getenv("GOOGLE_API_KEY")
+# API_KEY = os.getenv("GOOGLE_API_KEY")
+API_KEY = "AIzaSyBzTDbvM9cHX-skFhedFMGVjjxzwMxwU7Q"
 
 if not API_KEY:
     raise ValueError("API Key is missing! Please set GOOGLE_API_KEY in the .env file.")
@@ -100,6 +102,16 @@ def verify_documents():
     except Exception as e:
         print("Error:", str(e))
         return jsonify({"error": str(e)}), 500
+    
+
+MONGO_URI = "mongodb+srv://shravanipatil1427:Shweta2509@cluster0.hfdxa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(MONGO_URI)
+db = client["Cluster0"]  # Ensure this matches your database name
+collection = db["insurance_policies"]
+@app.route("/api/insurance", methods=["GET"])
+def get_insurance():
+    policies = list(collection.find({}, {"_id": 0}))  # Exclude MongoDB _id field
+    return jsonify(policies)
 
 
 if __name__ == '__main__':

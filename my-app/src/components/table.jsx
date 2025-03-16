@@ -1,99 +1,107 @@
-// This is a single JSX file with all components defined together
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/table.css";
-// Main App Component
+
 function AnalyticsDashboard() {
-    const stocks = [
-        { name: "Apple Inc", symbol: "AAPL" },
-        { name: "Microsoft", symbol: "MSFT" },
-        { name: "Tesla Motors", symbol: "TSLA" },
-      ];
-    return (
-        
-      <div style={{ display: 'flex', height: '100vh',backgroundColor: 'white' }}>
-        
-       
-        
-        {/* Main Content */}
-        <div style={{ flex: 1, padding: '32px', overflow: 'auto' }}>
-         <div className="buttons" style={{ width: "300px", justifyContent: "space-between", display: "flex", paddingBottom:"10px"}}>
-            <button >Stocks</button>
-            <button>Bonds</button>
-            <button>Insurance</button>
-         </div>
-          
-          {/* Data Table */}
-          <div style={{ border: '1px solid rgb(213, 213, 213)', borderRadius: '6px', overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500 ,  borderBottom: '1px solid #ebebeb', color:'black', }}>Name</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb' , color:'black',}}>Status</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Percent Change</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>High price of the day</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}>Low price of the day</th>
-                  <th style={{ padding: '5px 16px', textAlign: 'left',  fontWeight: 500, borderBottom: '1px solid #ebebeb'  ,color:'black',}}></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><Link to={`/stockdetails`}>Homepage Overview</Link></td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
-                    <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#dcfce7', color: '#166534' }}>Online</span>
-                  </td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>212423</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>8345</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>18.5</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Product Details - Gadgets</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
-                    <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#dcfce7', color: '#166534' }}>Online</span>
-                  </td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>172240</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>5653</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>9.7</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Checkout Process - Step 1</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
-                    <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#f1f5f9', color: '#64748b' }}>Offline</span>
-                  </td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>58240</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3455</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>15.2</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>User Profile Dashboard</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
-                    <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#dcfce7', color: '#166534' }}>Online</span>
-                  </td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>96240</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>112543</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>4.5</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button style={{backgroundColor: "grey"}}>Sell</button></td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>Article Listing - Tech News</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>
-                    <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '9999px', fontSize: '12px', backgroundColor: '#f1f5f9', color: '#64748b' }}>Offline</span>
-                  </td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>142240</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3653</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}>3.1</td>
-                  <td style={{ padding: '5px 16px', borderBottom: '1px solid #ebebeb',  color:'black',}}><button  style={{backgroundColor: "grey"}}>Sell</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+  const [stocks, setStocks] = useState([
+    { id: 1, name: "Apple Inc", symbol: "AAPL", status: "Online", percentChange: 18.5, highPrice: 345, lowPrice: 212 },
+    { id: 2, name: "Microsoft", symbol: "MSFT", status: "Online", percentChange: 9.7, highPrice: 653, lowPrice: 172},
+    { id: 3, name: "Tesla Motors", symbol: "TSLA", status: "Offline", percentChange: 15.2, highPrice: 1355, lowPrice: 582 }
+  ]);
+
+  // Function to handle selling a stock
+  const handleSell = (id, name) => {
+    const confirmSell = window.confirm(`Do you want to sell this share: ${name}?`);
+    if (confirmSell) {
+      setStocks(stocks.filter(stock => stock.id !== id)); // Remove stock from list
+    }
+  };
+
+  return (
+    <div style={{ display: "flex", height: "100vh", backgroundColor: "white" }}>
+      <div style={{ flex: 1, padding: "32px", overflow: "auto" }}>
+        <div className="buttons" style={{ width: "300px", justifyContent: "space-between", display: "flex", paddingBottom: "10px" }}>
+          <button>Stocks</button>
+          <button>Bonds</button>
+          <button>Insurance</button>
         </div>
-        
+
+        {/* Data Table */}
+        <div style={{ border: "1px solid rgb(213, 213, 213)", borderRadius: "6px", overflow: "hidden" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead>
+              <tr>
+                <th style={tableHeaderStyle}>Name</th>
+                <th style={tableHeaderStyle}>Status</th>
+                <th style={tableHeaderStyle}>Percent Change</th>
+                <th style={tableHeaderStyle}>High Price of the Day</th>
+                <th style={tableHeaderStyle}>Current Price of the day</th>
+                <th style={tableHeaderStyle}></th>
+              </tr>
+            </thead>
+            <tbody>
+              {stocks.map(stock => (
+                <tr key={stock.id}>
+                  <td style={tableCellStyle}>
+                    <Link to={`/stockdetails/${stock.symbol}`}>{stock.name}</Link>
+                  </td>
+                  <td style={tableCellStyle}>
+                    <span style={getStatusStyle(stock.status)}>{stock.status}</span>
+                  </td>
+                  <td style={tableCellStyle}>{stock.percentChange}</td>
+                  <td style={tableCellStyle}>{stock.highPrice}</td>
+                  <td style={tableCellStyle}>{stock.lowPrice}</td>
+                  <td style={tableCellStyle}>
+                    <button style={sellButtonStyle} onClick={() => handleSell(stock.id, stock.name)}>Sell</button>
+                  </td>
+                </tr>
+              ))}
+              {stocks.length === 0 && (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center", padding: "10px", color: "gray" }}>No stocks available.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    );
-  }
-  export default AnalyticsDashboard;
-  // To use this component in a React application:
-  // ReactDOM.render(<AnalyticsDashboard />, document.getElementById('root'));
+    </div>
+  );
+}
+
+// Styles for Table Headers and Cells
+const tableHeaderStyle = {
+  padding: "5px 16px",
+  textAlign: "left",
+  fontWeight: 500,
+  borderBottom: "1px solid #ebebeb",
+  color: "black",
+};
+
+const tableCellStyle = {
+  padding: "5px 16px",
+  borderBottom: "1px solid #ebebeb",
+  color: "black",
+};
+
+// Status Badge Styles
+const getStatusStyle = (status) => ({
+  display: "inline-block",
+  padding: "2px 8px",
+  borderRadius: "9999px",
+  fontSize: "12px",
+  backgroundColor: status === "Online" ? "#dcfce7" : "#f1f5f9",
+  color: status === "Online" ? "#166534" : "#64748b",
+});
+
+// Sell Button Styles
+const sellButtonStyle = {
+  backgroundColor: "grey",
+  color: "white",
+  padding: "5px 10px",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer",
+};
+
+export default AnalyticsDashboard;

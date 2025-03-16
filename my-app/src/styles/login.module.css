@@ -5,11 +5,12 @@
     justify-content: center;
     align-items: center;
     margin-top: 7rem;
+    margin-right: 550px;
   }
   
   .login-box {
     display: flex;
-    width: 80%;
+    width: 100%;
     max-width: 900px;
     background: #ffffff;
     border-radius: 12px;

@@ -1,0 +1,74 @@
+/* styles.css */
+
+/* Styling for the title */
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Ensures space below title */
+}
+
+/* Styling for the table container */
+.table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Table styling */
+table {
+    width: 90%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10%;
+}
+
+/* Table header */
+th {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Table rows */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Zebra striping */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tr:hover {
+    background-color: #d9edf7;
+}
+
+/* Aligning text */
+th, td {
+    text-align: left;
+}
+
+
+/* Button Styling */
+.buy-btn {
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.buy-btn:hover {
+    background-color: #218838;
+}

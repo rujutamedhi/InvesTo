@@ -2,9 +2,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login
-from .serializers import UserSerializer
+from .serializers import UserSerializer, CollaborationRequestSerializer, JointAccountSerializer
 from django.contrib.auth.hashers import check_password 
-from .models import User
+from .models import User, CollaborationRequest, JointAccount
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
@@ -17,13 +17,12 @@ from django.contrib.auth.hashers import check_password
 from django.http import JsonResponse
 from django.views import View
 import requests
-
 from django.views import View
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from bson.decimal128 import Decimal128
 class LoginView(APIView):
     def post(self, request):
         print("reached")
@@ -78,3 +77,167 @@ class SignupView(APIView):
 
         except requests.exceptions.RequestException as e:
             return Response({"error": "Flask server error: " + str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class UserProfileView(APIView):
+    def get(self, request, email):
+        try:
+            # Query the user from the database using the email
+            user = User.objects.get(email=email)
+            wallet_balance = str(user.wallet_balance) if isinstance(user.wallet_balance, Decimal128) else user.wallet_balance
+            # Return user data as JSON
+            return JsonResponse({
+                'status': 'success',
+                'message': f'Profile found for {email}',
+                'data': {
+                    'username': user.username,
+                    'email': user.email,
+                    'phone_number': user.phone_number,
+                    
+                    'age': user.age,
+                    
+                    'city': user.city,
+                    
+                    'risk_profile': user.risk_profile,
+                    'wallet_balance': wallet_balance,
+                    'gender': user.gender,
+                    
+                    
+                }
+            })
+            
+        except User.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found.'})
+        
+        
+    def patch(self, request, email):  # Add PATCH method
+        user = User.objects.get(email=email)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data})
+        return Response(serializer.errors, status=400)
+    
+
+
+class BondsView(APIView):
+    def get(self, request):
+        response = requests.get(f"https://api.twelvedata.com/bonds?apikey=d1b4c902740849cebfe6d9a88b253800")
+        return Response(response.json(), status=response.status_code)
+    
+    
+from bson import ObjectId  # ✅ Import ObjectId for MongoDB compatibility
+
+
+
+
+
+class CollaborationRequestView(APIView):
+    def post(self, request):
+        sender_email = request.data.get("sender_email")
+        receiver_email = request.data.get("receiver_email")
+        sender_authority = request.data.get("sender_authority")
+        receiver_authority = request.data.get("receiver_authority")
+        
+        # 🔹 Fetch sender and receiver using `id`, which corresponds to MongoDB `_id`
+        sender = User.objects.filter(email=sender_email).first()
+        receiver = User.objects.filter(email=receiver_email).first()
+
+        print("Sender Object:", sender)
+        print("Receiver Object:", receiver)
+
+        if not sender or not receiver:
+            return Response({"error": "Sender or Receiver not found"}, status=400)
+
+        # ✅ Extract the `id` (MongoDB `_id`)
+        sender_id = str(sender._id)  # Use `.id` instead of `._id`
+        receiver_id = str(receiver._id)
+
+        print("Sender ID:", sender_id)
+        print("Receiver ID:", receiver_id)
+
+        if not sender_id or not receiver_id:
+            return Response({"error": "Invalid user IDs"}, status=400)
+
+        # 🔹 Create CollaborationRequest using MongoDB `id`
+        collab_request = CollaborationRequest.objects.create(
+            sender_id=ObjectId(sender_id),  # ✅ Use MongoDB ObjectId
+            receiver_id=ObjectId(receiver_id),
+            sender_authority=sender_authority,
+            receiver_authority=receiver_authority,
+            status="pending"
+        )
+
+        return Response({
+            "message": "Collaboration request sent successfully!",
+            "request_id": str(collab_request.id)
+        }, status=status.HTTP_201_CREATED)
+
+
+
+
+
+
+
+
+class CollaborationAcceptView(APIView):
+    """
+    API to accept a collaboration request and create a joint account.
+    """
+    def post(self, request, request_id):
+        try:
+            collab_request = CollaborationRequest.objects.get(id=request_id)
+
+            if collab_request.status != "pending":
+                return Response({"error": "Request already processed"}, status=400)
+
+            # Update status to accepted
+            collab_request.status = "accepted"
+            collab_request.save()
+
+            # Create Joint Account
+            joint_account = JointAccount.objects.create(
+                user1=collab_request.sender,
+                user2=collab_request.receiver,
+                authority1=collab_request.sender_authority,
+                authority2=collab_request.receiver_authority
+            )
+
+            return Response({
+                "message": "Collaboration accepted, joint account created!",
+                "joint_account_id": joint_account.id
+            }, status=status.HTTP_201_CREATED)
+
+        except CollaborationRequest.DoesNotExist:
+            return Response({"error": "Request not found"}, status=404)
+
+
+class CollaborationRejectView(APIView):
+    """
+    API to reject a collaboration request.
+    """
+    def post(self, request, request_id):
+        try:
+            collab_request = CollaborationRequest.objects.get(id=request_id)
+
+            if collab_request.status != "pending":
+                return Response({"error": "Request already processed"}, status=400)
+
+            # Update status to rejected
+            collab_request.status = "rejected"
+            collab_request.save()
+
+            return Response({"message": "Collaboration request rejected"}, status=status.HTTP_200_OK)
+
+        except CollaborationRequest.DoesNotExist:
+            return Response({"error": "Request not found"}, status=404)
+
+
+class CollaborationListView(APIView):
+    """
+    API to list pending collaboration requests for a user.
+    """
+    def get(self, request, user_email):
+        user = get_object_or_404(User, email=user_email)
+        requests = CollaborationRequest.objects.filter(receiver=user, status="pending")
+        serializer = CollaborationRequestSerializer(requests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

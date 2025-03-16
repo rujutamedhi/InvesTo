@@ -12,38 +12,40 @@ import BondsList from "./pages/BondList";
 import Table from "./components/table"
 import Collabform from "./components/CollabForm";
 import Buyform from "./components/buyform";
-
+import Suggestions from "./components/Suggestion";
+import { WalletProvider } from "./context/WalletContext";
 
 function Layout() {
   const location = useLocation(); 
-  const showSidebar = location.pathname !== "/"; 
+  const hideSidebar = location.pathname.startsWith("/login") || location.pathname.startsWith("/signup");
 
   return (
     <div className="app-container">
-<Sidebar/>
-        <div className="page-content">
-          <AuthProvider>
+      {!hideSidebar && <Sidebar />} 
+      
+      <div className="page-content">
+      <WalletProvider>
+        <AuthProvider>
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/signup" element={<SignupForm/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/stock-list" element={<StockList />} />
-            <Route path="table" element={<Table/>}/>
-            <Route path="/stock/:symbol" element={<StockDetails/>}/>
+            <Route path="/table" element={<Table />} />
+            <Route path="/stock/:symbol" element={<StockDetails />} />
             <Route path="/bonds" element={<BondsList />} />
-            <Route path="/collabform" element={<Collabform/>}/>
-            <Route path="/buyform" element={<Buyform/>}/>
-            </Routes>
-            </AuthProvider>
-        </div>
+            <Route path="/suggestion" element={<Suggestions />} />
+            <Route path="/collabform" element={<Collabform />} />
+            <Route path="/buyform" element={<Buyform />} />
+          </Routes>
+        </AuthProvider>
+        </WalletProvider>
       </div>
-    // </div>
+    </div>
   );
 }
+
 
 function App() {
   return (

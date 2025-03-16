@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, CollaborationRequest, JointAccount
 from rest_framework import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ValidationError
@@ -19,3 +19,14 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password) 
         user.save()
         return user
+
+class CollaborationRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollaborationRequest
+        fields = '__all__'
+
+
+class JointAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JointAccount
+        fields = '_all_'
