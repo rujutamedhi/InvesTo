@@ -68,7 +68,7 @@ const SignupForm = () => {
 
       // Redirect to /dashboard after successful signup
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/login");
       }, 2000);
       
     } catch (err) {
@@ -128,7 +128,7 @@ const SignupForm = () => {
                     <input
                       id="username"
                       name="username"
-                      placeholder="johndoe"
+                      placeholder=""
                       value={formData.username}
                       onChange={handleChange}
                       required
@@ -140,7 +140,7 @@ const SignupForm = () => {
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder=""
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -152,7 +152,7 @@ const SignupForm = () => {
                       id="password"
                       name="password"
                       type="password"
-                      placeholder="••••••••"
+                      placeholder=""
                       value={formData.password}
                       onChange={handleChange}
                       required
@@ -168,7 +168,7 @@ const SignupForm = () => {
                     <input
                       id="phone_number"
                       name="phone_number"
-                      placeholder="+91 9876543210"
+                      placeholder=""
                       value={formData.phone_number}
                       onChange={handleChange}
                       required
@@ -180,7 +180,7 @@ const SignupForm = () => {
                       id="age"
                       name="age"
                       type="number"
-                      placeholder="25"
+                      placeholder=""
                       value={formData.age}
                       onChange={handleChange}
                       required
@@ -191,7 +191,7 @@ const SignupForm = () => {
                     <input
                       id="city"
                       name="city"
-                      placeholder="Mumbai"
+                      placeholder=""
                       value={formData.city}
                       onChange={handleChange}
                       required

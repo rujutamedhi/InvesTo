@@ -28,7 +28,7 @@ function AnalyticsDashboard() {
 
         {/* Data Table */}
         <div style={{ border: "1px solid rgb(213, 213, 213)", borderRadius: "6px", overflow: "hidden" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse",marginTop:"5px" }}>
             <thead>
               <tr>
                 <th style={tableHeaderStyle}>Name</th>
